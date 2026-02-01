@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct DoAvoidApp: App {
+    typealias Day = Date
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
