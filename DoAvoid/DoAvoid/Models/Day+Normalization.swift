@@ -7,8 +7,14 @@
 
 import Foundation
 
+extension DayEntry {
+    static func normalize(_ date: Date) -> Date {
+        Calendar.current.startOfDay(for: date)
+    }
+}
+
 extension Date {
-    var startOfDay: Date {
+    var normalizedDay: Date {
         Calendar.current.startOfDay(for: self)
     }
 }

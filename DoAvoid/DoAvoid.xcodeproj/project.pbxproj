@@ -7,20 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		384C0AF52F3259F000AD73BA /* DayEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C0AF42F3259F000AD73BA /* DayEntry.swift */; };
+		384C0AF72F33D40900AD73BA /* DoAvoidKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C0AF62F33D40900AD73BA /* DoAvoidKind.swift */; };
+		384C0AF92F33D43500AD73BA /* AvoidState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C0AF82F33D43500AD73BA /* AvoidState.swift */; };
 		3850F4A02F2D810D000472EB /* DoAvoidApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F49F2F2D810D000472EB /* DoAvoidApp.swift */; };
 		3850F4A22F2D810D000472EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4A12F2D810D000472EB /* ContentView.swift */; };
 		3850F4A42F2D810F000472EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3850F4A32F2D810F000472EB /* Assets.xcassets */; };
 		3850F4A72F2D810F000472EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3850F4A62F2D810F000472EB /* Preview Assets.xcassets */; };
 		3850F4AE2F2EDB47000472EB /* DoAvoidItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4AD2F2EDB47000472EB /* DoAvoidItem.swift */; };
 		3850F4B02F2EDBC0000472EB /* DoAvoidStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4AF2F2EDBC0000472EB /* DoAvoidStore.swift */; };
-		3850F4B22F2EDCB2000472EB /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4B12F2EDCB2000472EB /* BarView.swift */; };
 		3850F4B42F2EE1BE000472EB /* Day+Normalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4B32F2EE1BE000472EB /* Day+Normalization.swift */; };
-		3850F4B62F2EE5EB000472EB /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4B52F2EE5EB000472EB /* FieldView.swift */; };
-		3850F4B82F2EE657000472EB /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4B72F2EE657000472EB /* TimelineView.swift */; };
-		3850F4BA2F2EEC7D000472EB /* CreateItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4B92F2EEC7D000472EB /* CreateItemView.swift */; };
+		3850F4C42F325074000472EB /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4C02F325074000472EB /* TimelineView.swift */; };
+		3850F4C52F325074000472EB /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4C12F325074000472EB /* FieldView.swift */; };
+		3850F4C62F325074000472EB /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4C22F325074000472EB /* BarView.swift */; };
+		3850F4C72F325074000472EB /* CreateItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850F4C32F325074000472EB /* CreateItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		384C0AF42F3259F000AD73BA /* DayEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntry.swift; sourceTree = "<group>"; };
+		384C0AF62F33D40900AD73BA /* DoAvoidKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoAvoidKind.swift; sourceTree = "<group>"; };
+		384C0AF82F33D43500AD73BA /* AvoidState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidState.swift; sourceTree = "<group>"; };
 		3850F49C2F2D810D000472EB /* DoAvoid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoAvoid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3850F49F2F2D810D000472EB /* DoAvoidApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoAvoidApp.swift; sourceTree = "<group>"; };
 		3850F4A12F2D810D000472EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,11 +34,11 @@
 		3850F4A62F2D810F000472EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3850F4AD2F2EDB47000472EB /* DoAvoidItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoAvoidItem.swift; sourceTree = "<group>"; };
 		3850F4AF2F2EDBC0000472EB /* DoAvoidStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoAvoidStore.swift; sourceTree = "<group>"; };
-		3850F4B12F2EDCB2000472EB /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		3850F4B32F2EE1BE000472EB /* Day+Normalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+Normalization.swift"; sourceTree = "<group>"; };
-		3850F4B52F2EE5EB000472EB /* FieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
-		3850F4B72F2EE657000472EB /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
-		3850F4B92F2EEC7D000472EB /* CreateItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemView.swift; sourceTree = "<group>"; };
+		3850F4C02F325074000472EB /* TimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		3850F4C12F325074000472EB /* FieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
+		3850F4C22F325074000472EB /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		3850F4C32F325074000472EB /* CreateItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +52,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		384C0AF12F32552B00AD73BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3850F4C22F325074000472EB /* BarView.swift */,
+				3850F4C12F325074000472EB /* FieldView.swift */,
+				3850F4C02F325074000472EB /* TimelineView.swift */,
+				3850F4C32F325074000472EB /* CreateItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		384C0AF22F3255AD00AD73BA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3850F4B32F2EE1BE000472EB /* Day+Normalization.swift */,
+				3850F4AD2F2EDB47000472EB /* DoAvoidItem.swift */,
+				384C0AF42F3259F000AD73BA /* DayEntry.swift */,
+				384C0AF62F33D40900AD73BA /* DoAvoidKind.swift */,
+				384C0AF82F33D43500AD73BA /* AvoidState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		384C0AF32F3255B600AD73BA /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				3850F4AF2F2EDBC0000472EB /* DoAvoidStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
 		3850F4932F2D810D000472EB = {
 			isa = PBXGroup;
 			children = (
@@ -67,15 +104,11 @@
 			children = (
 				3850F4A32F2D810F000472EB /* Assets.xcassets */,
 				3850F4A52F2D810F000472EB /* Preview Content */,
+				384C0AF32F3255B600AD73BA /* Stores */,
+				384C0AF22F3255AD00AD73BA /* Models */,
+				384C0AF12F32552B00AD73BA /* Views */,
 				3850F49F2F2D810D000472EB /* DoAvoidApp.swift */,
 				3850F4A12F2D810D000472EB /* ContentView.swift */,
-				3850F4B92F2EEC7D000472EB /* CreateItemView.swift */,
-				3850F4B52F2EE5EB000472EB /* FieldView.swift */,
-				3850F4B32F2EE1BE000472EB /* Day+Normalization.swift */,
-				3850F4B72F2EE657000472EB /* TimelineView.swift */,
-				3850F4B12F2EDCB2000472EB /* BarView.swift */,
-				3850F4AD2F2EDB47000472EB /* DoAvoidItem.swift */,
-				3850F4AF2F2EDBC0000472EB /* DoAvoidStore.swift */,
 			);
 			path = DoAvoid;
 			sourceTree = "<group>";
@@ -158,15 +191,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3850F4C62F325074000472EB /* BarView.swift in Sources */,
 				3850F4B02F2EDBC0000472EB /* DoAvoidStore.swift in Sources */,
+				3850F4C42F325074000472EB /* TimelineView.swift in Sources */,
 				3850F4AE2F2EDB47000472EB /* DoAvoidItem.swift in Sources */,
+				384C0AF72F33D40900AD73BA /* DoAvoidKind.swift in Sources */,
 				3850F4A22F2D810D000472EB /* ContentView.swift in Sources */,
+				3850F4C72F325074000472EB /* CreateItemView.swift in Sources */,
+				384C0AF92F33D43500AD73BA /* AvoidState.swift in Sources */,
 				3850F4A02F2D810D000472EB /* DoAvoidApp.swift in Sources */,
 				3850F4B42F2EE1BE000472EB /* Day+Normalization.swift in Sources */,
-				3850F4BA2F2EEC7D000472EB /* CreateItemView.swift in Sources */,
-				3850F4B22F2EDCB2000472EB /* BarView.swift in Sources */,
-				3850F4B62F2EE5EB000472EB /* FieldView.swift in Sources */,
-				3850F4B82F2EE657000472EB /* TimelineView.swift in Sources */,
+				3850F4C52F325074000472EB /* FieldView.swift in Sources */,
+				384C0AF52F3259F000AD73BA /* DayEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

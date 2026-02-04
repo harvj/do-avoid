@@ -33,6 +33,7 @@ struct CreateItemView: View {
                 onDone()
             }
             .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+            
         }
         .padding()
     }

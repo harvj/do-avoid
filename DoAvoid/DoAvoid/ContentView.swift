@@ -18,15 +18,19 @@ enum DisplayMode: CaseIterable {
     // future: .diagnostic, .debug, etc.
 }
 
+enum FilterMode {
+    case all
+    case dosOnly
+    case avoidsOnly
+}
+
 struct ContentView: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @StateObject private var store = DoAvoidStore()
     
+    @State private var filterMode: FilterMode = .all
     @State private var appMode: AppMode = .field
     @State private var displayMode: DisplayMode = .withBadges
-
-    @State private var isHoldingUpward = false
-    @State private var holdTask: Task<Void, Never>? = nil
     
     var isLandscape: Bool {
         verticalSizeClass == .compact
@@ -41,9 +45,10 @@ struct ContentView: View {
                 case .field:
                     FieldView(
                         store: store,
-                        displayMode: displayMode
+                        displayMode: displayMode,
+                        filterMode: filterMode
                     )
-                    .gesture(scrollUpAndHoldGesture)
+                    .gesture(verticalIntentGesture)
 
                 case .create:
                     CreateItemView(
@@ -55,6 +60,9 @@ struct ContentView: View {
                 }
             }
             .gesture(horizontalSwipeGesture)
+            .onTapGesture {
+                filterMode = .all
+            }
         }
     }
     
@@ -77,40 +85,38 @@ struct ContentView: View {
             }
     }
     
-    var scrollUpAndHoldGesture: some Gesture {
+    var verticalIntentGesture: some Gesture {
         DragGesture(minimumDistance: 20)
-            .onChanged { value in
-                // Only care about upward drag
-                guard value.translation.height < -80 else {
-                    cancelHold()
+            .onEnded { value in
+                let vertical = value.translation.height
+                let velocity = value.predictedEndTranslation.height - vertical
+
+                // QUICK flicks → filters
+                if abs(velocity) > 150 {
+                    if velocity < 0 {
+                        // quick up
+                        if filterMode == .dosOnly {
+                            filterMode = .all
+                        } else {
+                            filterMode = .avoidsOnly
+                        }
+                    } else {
+                        // quick down
+                        appMode = .field
+                        if filterMode == .avoidsOnly {
+                            filterMode = .all
+                        } else {
+                            filterMode = .dosOnly
+                        }
+                    }
                     return
                 }
 
-                if !isHoldingUpward {
-                    isHoldingUpward = true
-                    startHoldTimer()
+                // SLOW pull up + hold → create
+                if vertical < -100 {
+                    appMode = .create
                 }
             }
-            .onEnded { _ in
-                cancelHold()
-            }
-    }
-    
-    func startHoldTimer() {
-        holdTask?.cancel()
-
-        holdTask = Task {
-            try? await Task.sleep(nanoseconds: 600_000_000) // ~0.6s
-            if isHoldingUpward {
-                appMode = .create
-            }
-        }
-    }
-
-    func cancelHold() {
-        isHoldingUpward = false
-        holdTask?.cancel()
-        holdTask = nil
     }
     
     func cycleDisplayMode() {
