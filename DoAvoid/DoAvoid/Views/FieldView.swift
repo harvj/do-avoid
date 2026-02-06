@@ -20,9 +20,9 @@ struct FieldView: View {
                 case .all:
                     return true
                 case .dosOnly:
-                    return item.kind == .do
+                    return item.kind == .doItem
                 case .avoidsOnly:
-                    return item.kind == .avoid
+                    return item.kind == .avoidItem
                 }
             }
             
@@ -34,13 +34,13 @@ struct FieldView: View {
                     
                     BarView(
                         title: item.title,
-                        color: item.kind == .do
+                        color: item.kind == .doItem
                         ? Color.yellow.opacity(0.45)
                         : Color.gray.opacity(0.25),
                         isTop: index == 0,
                         isBottom: index == visibleItems.count - 1,
-                        daysCount: item.markedDays.count,
-                        isMarkedToday: item.markedDays.contains(Date().startOfDay),
+                        daysCount: item.entries.values.filter { $0.isMarked }.count,
+                        isMarkedToday: (item.entry(for: Date())?.isMarked ?? false),
                         showBadges: displayMode == .withBadges
                     )
                     .frame(height: rowHeight)

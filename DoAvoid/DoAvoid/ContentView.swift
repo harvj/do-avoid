@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 enum AppMode {
     case field          // normal portrait
@@ -41,6 +44,15 @@ struct ContentView: View {
             TimelineView(store: store)
         } else {
             ZStack {
+                Color.clear
+                    .ignoresSafeArea()
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        appMode = .field
+                        filterMode = .all
+                        triggerDismissHaptic()
+                    }
+                
                 switch appMode {
                 case .field:
                     FieldView(
@@ -55,36 +67,14 @@ struct ContentView: View {
                         store: store,
                         onDone: {
                             appMode = .field
+                            triggerDismissHaptic()
                         }
                     )
                 }
             }
-            .gesture(horizontalSwipeGesture)
-            .onTapGesture {
-                filterMode = .all
-            }
         }
     }
-    
-    var horizontalSwipeGesture: some Gesture {
-        DragGesture(minimumDistance: 20)
-            .onEnded { value in
-                let horizontal = value.translation.width
-                let vertical = abs(value.translation.height)
-
-                // Only react to mostly-horizontal swipes
-                guard vertical < 40 else { return }
-
-                if horizontal > 80 {
-                    // Swipe right → create
-                    appMode = .create
-                } else if horizontal < -80 {
-                    // Swipe left → cycle display mode
-                    cycleDisplayMode()
-                }
-            }
-    }
-    
+        
     var verticalIntentGesture: some Gesture {
         DragGesture(minimumDistance: 20)
             .onEnded { value in
@@ -102,7 +92,6 @@ struct ContentView: View {
                         }
                     } else {
                         // quick down
-                        appMode = .field
                         if filterMode == .avoidsOnly {
                             filterMode = .all
                         } else {
@@ -119,11 +108,11 @@ struct ContentView: View {
             }
     }
     
-    func cycleDisplayMode() {
-        let all = DisplayMode.allCases
-        if let index = all.firstIndex(of: displayMode) {
-            displayMode = all[(index + 1) % all.count]
-        }
+    func triggerDismissHaptic() {
+        #if os(iOS)
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        #endif
     }
 }
 
@@ -132,3 +121,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

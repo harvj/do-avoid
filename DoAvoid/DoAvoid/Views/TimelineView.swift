@@ -19,12 +19,16 @@ struct TimelineView: View {
                         Text(item.title.uppercased())
                             .font(.headline)
 
-                        if item.markedDays.isEmpty {
+                        let markedDates = item.entries.values
+                            .filter { $0.isMarked }
+                            .map { $0.date }
+                        
+                        if markedDates.isEmpty {
                             Text("No history yet")
                                 .foregroundColor(.secondary)
                         } else {
                             ForEach(
-                                item.markedDays.sorted(by: >),
+                                markedDates.sorted(by: >),
                                 id: \.self
                             ) { day in
                                 Text(day.formatted(date: .abbreviated, time: .omitted))
@@ -39,3 +43,4 @@ struct TimelineView: View {
         }
     }
 }
+

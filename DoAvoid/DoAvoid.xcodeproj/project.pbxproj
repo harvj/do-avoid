@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		381BA7B92F363E3A006A3371 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381BA7B82F363E3A006A3371 /* AppStyle.swift */; };
 		384C0AF52F3259F000AD73BA /* DayEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C0AF42F3259F000AD73BA /* DayEntry.swift */; };
 		384C0AF72F33D40900AD73BA /* DoAvoidKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C0AF62F33D40900AD73BA /* DoAvoidKind.swift */; };
 		384C0AF92F33D43500AD73BA /* AvoidState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C0AF82F33D43500AD73BA /* AvoidState.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		381BA7B82F363E3A006A3371 /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		384C0AF42F3259F000AD73BA /* DayEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntry.swift; sourceTree = "<group>"; };
 		384C0AF62F33D40900AD73BA /* DoAvoidKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoAvoidKind.swift; sourceTree = "<group>"; };
 		384C0AF82F33D43500AD73BA /* AvoidState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidState.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				384C0AF12F32552B00AD73BA /* Views */,
 				3850F49F2F2D810D000472EB /* DoAvoidApp.swift */,
 				3850F4A12F2D810D000472EB /* ContentView.swift */,
+				381BA7B82F363E3A006A3371 /* AppStyle.swift */,
 			);
 			path = DoAvoid;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				3850F4C62F325074000472EB /* BarView.swift in Sources */,
 				3850F4B02F2EDBC0000472EB /* DoAvoidStore.swift in Sources */,
 				3850F4C42F325074000472EB /* TimelineView.swift in Sources */,
+				381BA7B92F363E3A006A3371 /* AppStyle.swift in Sources */,
 				3850F4AE2F2EDB47000472EB /* DoAvoidItem.swift in Sources */,
 				384C0AF72F33D40900AD73BA /* DoAvoidKind.swift in Sources */,
 				3850F4A22F2D810D000472EB /* ContentView.swift in Sources */,
@@ -331,6 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoAvoid/Preview Content\"";
+				DEVELOPMENT_TEAM = 522376PKLR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -359,6 +364,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoAvoid/Preview Content\"";
+				DEVELOPMENT_TEAM = 522376PKLR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
