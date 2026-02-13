@@ -35,6 +35,9 @@ struct ContentView: View {
     @State private var appMode: AppMode = .field
     @State private var displayMode: DisplayMode = .withBadges
     
+    @State private var fieldOffset: CGFloat = 0
+    @State private var dragOffset: CGFloat = 0
+
     var isLandscape: Bool {
         verticalSizeClass == .compact
     }
@@ -44,70 +47,93 @@ struct ContentView: View {
             TimelineView(store: store)
         } else {
             ZStack {
-                Color.clear
-                    .ignoresSafeArea()
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        appMode = .field
-                        filterMode = .all
-                        triggerDismissHaptic()
-                    }
-                
-                switch appMode {
-                case .field:
-                    FieldView(
-                        store: store,
-                        displayMode: displayMode,
-                        filterMode: filterMode
-                    )
-                    .gesture(verticalIntentGesture)
+                // Bottom layer (always there)
+                CreateItemView(
+                    store: store,
+                    onDone: closeCreate
+                )
 
-                case .create:
-                    CreateItemView(
-                        store: store,
-                        onDone: {
-                            appMode = .field
-                            triggerDismissHaptic()
-                        }
-                    )
-                }
+                // Top layer (moves)
+                FieldView(
+                    store: store,
+                    displayMode: displayMode,
+                    filterMode: filterMode
+                )
+                .offset(y: fieldOffset + dragOffset)
+                .gesture(verticalIntentGesture)
             }
         }
     }
         
     var verticalIntentGesture: some Gesture {
-        DragGesture(minimumDistance: 20)
+        DragGesture(minimumDistance: 10)
+            .onChanged { value in
+                let y = value.translation.height
+
+                // Only drag upward
+                if y < 0 {
+                    dragOffset = y
+                }
+            }
+
             .onEnded { value in
                 let vertical = value.translation.height
-                let velocity = value.predictedEndTranslation.height - vertical
+                let predicted = value.predictedEndTranslation.height
 
-                // QUICK flicks → filters
-                if abs(velocity) > 150 {
-                    if velocity < 0 {
-                        // quick up
-                        if filterMode == .dosOnly {
-                            filterMode = .all
-                        } else {
-                            filterMode = .avoidsOnly
-                        }
-                    } else {
-                        // quick down
-                        if filterMode == .avoidsOnly {
-                            filterMode = .all
-                        } else {
-                            filterMode = .dosOnly
-                        }
+                let total = vertical + (predicted - vertical) * 0.3
+                let speed = abs(predicted - vertical)
+
+                dragOffset = 0
+
+                // Fast flicks → filters
+                if speed > 120 {
+                    if total < 0 {
+                        toggleAvoids()
+                    } else if total > 0 {
+                        toggleDos()
                     }
                     return
                 }
 
-                // SLOW pull up + hold → create
-                if vertical < -100 {
-                    appMode = .create
+                // Slow big pull → open sheet
+                if total < -120 {
+                    openCreate()
+                    return
                 }
+
+                // Otherwise snap closed
+                closeCreate()
             }
     }
+
     
+    func toggleAvoids() {
+        if filterMode == .dosOnly {
+            filterMode = .all
+        } else {
+            filterMode = .avoidsOnly
+        }
+    }
+    
+    func toggleDos() {
+        if filterMode == .avoidsOnly {
+            filterMode = .all
+        } else {
+            filterMode = .dosOnly
+        }
+    }
+
+    func openCreate() {
+        fieldOffset = -UIScreen.main.bounds.height
+        appMode = .create
+        triggerDismissHaptic()
+    }
+
+    func closeCreate() {
+        fieldOffset = 0
+        appMode = .field
+    }
+
     func triggerDismissHaptic() {
         #if os(iOS)
         let generator = UIImpactFeedbackGenerator(style: .light)
