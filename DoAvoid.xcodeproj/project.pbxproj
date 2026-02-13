@@ -92,6 +92,14 @@
 				38B2F9212F3F73F400519398 /* README.md */,
 				3850F49E2F2D810D000472EB /* DoAvoid */,
 				3850F49D2F2D810D000472EB /* Products */,
+				3850F4A32F2D810F000472EB /* Assets.xcassets */,
+				3850F4A52F2D810F000472EB /* Preview Content */,
+				384C0AF32F3255B600AD73BA /* Stores */,
+				384C0AF22F3255AD00AD73BA /* Models */,
+				384C0AF12F32552B00AD73BA /* Views */,
+				3850F49F2F2D810D000472EB /* DoAvoidApp.swift */,
+				3850F4A12F2D810D000472EB /* ContentView.swift */,
+				381BA7B82F363E3A006A3371 /* AppStyle.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,14 +114,6 @@
 		3850F49E2F2D810D000472EB /* DoAvoid */ = {
 			isa = PBXGroup;
 			children = (
-				3850F4A32F2D810F000472EB /* Assets.xcassets */,
-				3850F4A52F2D810F000472EB /* Preview Content */,
-				384C0AF32F3255B600AD73BA /* Stores */,
-				384C0AF22F3255AD00AD73BA /* Models */,
-				384C0AF12F32552B00AD73BA /* Views */,
-				3850F49F2F2D810D000472EB /* DoAvoidApp.swift */,
-				3850F4A12F2D810D000472EB /* ContentView.swift */,
-				381BA7B82F363E3A006A3371 /* AppStyle.swift */,
 			);
 			path = DoAvoid;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DoAvoid/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = 522376PKLR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -365,7 +365,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DoAvoid/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = 522376PKLR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
