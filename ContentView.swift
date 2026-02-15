@@ -35,8 +35,9 @@ struct ContentView: View {
     @State private var appMode: AppMode = .field
     @State private var displayMode: DisplayMode = .withBadges
     
-    @State private var fieldOffset: CGFloat = 0
+    @State private var containerOffset: CGFloat = 0
     @State private var dragOffset: CGFloat = 0
+    @State private var dragStartTime: Date?
 
     var isLandscape: Bool {
         verticalSizeClass == .compact
@@ -46,33 +47,46 @@ struct ContentView: View {
         if isLandscape {
             TimelineView(store: store)
         } else {
-            ZStack {
-                // Bottom layer (always there)
-                CreateItemView(
-                    store: store,
-                    onDone: closeCreate
-                )
+            GeometryReader { geo in
+                VStack(spacing: 0) {
 
-                // Top layer (moves)
-                FieldView(
-                    store: store,
-                    displayMode: displayMode,
-                    filterMode: filterMode
-                )
-                .offset(y: fieldOffset + dragOffset)
-                .gesture(verticalIntentGesture)
+                    FieldView(
+                        store: store,
+                        displayMode: displayMode,
+                        filterMode: filterMode
+                    )
+                    .frame(height: geo.size.height)
+
+                    CreateItemView(
+                        store: store,
+                        onDone: { closeCreate(height: geo.size.height) }
+                    )
+                    .frame(height: geo.size.height)
+                }
+                .offset(y: containerOffset + dragOffset)
+                .gesture(verticalIntentGesture(height: geo.size.height))
             }
         }
     }
         
-    var verticalIntentGesture: some Gesture {
+    func verticalIntentGesture(height: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 10)
             .onChanged { value in
                 let y = value.translation.height
+                let createDragThreshold: CGFloat = 80
 
-                // Only drag upward
-                if y < 0 {
+                // Only allow dragging up when on Field
+                if containerOffset == 0 && y < -createDragThreshold {
                     dragOffset = y
+                }
+
+                // Only allow dragging down when on Create
+                if containerOffset == -height && y > 0 {
+                    dragOffset = y
+                }
+
+                if dragStartTime == nil {
+                    dragStartTime = Date()
                 }
             }
 
@@ -81,28 +95,43 @@ struct ContentView: View {
                 let predicted = value.predictedEndTranslation.height
 
                 let total = vertical + (predicted - vertical) * 0.3
-                let speed = abs(predicted - vertical)
 
-                dragOffset = 0
+                // How long the drag lasted
+                let duration = Date().timeIntervalSince(dragStartTime ?? Date())
+                dragStartTime = nil
 
-                // Fast flicks → filters
-                if speed > 120 {
-                    if total < 0 {
+                // Approx velocity
+                let speed = abs(predicted - vertical) / max(duration, 0.01)
+
+                // FAST gestures → filters only
+                if speed > 900 {
+                    if total < -40 {
                         toggleAvoids()
-                    } else if total > 0 {
+                    } else if total > 40 {
                         toggleDos()
                     }
                     return
                 }
 
-                // Slow big pull → open sheet
-                if total < -120 {
-                    openCreate()
+                // SLOW + DEEP pull → create
+                if duration > 0.35 && speed < 600 && total < -120 {
+                    openCreate(height: height)
                     return
                 }
 
-                // Otherwise snap closed
-                closeCreate()
+                // Medium drags → filter
+                if total < -40 {
+                    toggleAvoids()
+                    return
+                }
+
+                if total > 40 {
+                    toggleDos()
+                    return
+                }
+
+                // Default: snap back
+                resetDrag()
             }
     }
 
@@ -113,6 +142,7 @@ struct ContentView: View {
         } else {
             filterMode = .avoidsOnly
         }
+        resetDrag()
     }
     
     func toggleDos() {
@@ -121,17 +151,33 @@ struct ContentView: View {
         } else {
             filterMode = .dosOnly
         }
+        resetDrag()
     }
 
-    func openCreate() {
-        fieldOffset = -UIScreen.main.bounds.height
-        appMode = .create
+    func openCreate(height: CGFloat) {
+        withAnimation(.spring()) {
+            containerOffset = -height
+            dragOffset = 0
+            appMode = .create
+        }
         triggerDismissHaptic()
     }
 
-    func closeCreate() {
-        fieldOffset = 0
+    func closeCreate(height: CGFloat) {
+        resetDrag()
         appMode = .field
+        triggerDismissHaptic()
+    }
+
+    func resetDrag() {
+        withAnimation(.interpolatingSpring(
+            stiffness: 280,
+            damping: 28
+        )) {
+            containerOffset = 0
+            dragOffset = 0
+
+        }
     }
 
     func triggerDismissHaptic() {

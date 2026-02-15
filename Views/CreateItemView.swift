@@ -69,3 +69,9 @@ struct CreateItemView: View {
     }
 }
 
+struct CreateItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
